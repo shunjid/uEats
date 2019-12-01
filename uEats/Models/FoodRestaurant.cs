@@ -5,9 +5,6 @@ namespace uEats.Models
 {
     public class FoodRestaurant
     {
-        [Key]
-        public int FoodRestaurantId { get; set; }
-        
         public int FoodId { get; set; }
         public Food Food { get; set; }
         
