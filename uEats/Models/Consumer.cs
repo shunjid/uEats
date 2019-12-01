@@ -12,5 +12,7 @@ namespace uEats.Models
         public int ConsumerAge { get; set; }
         
         public string ChoiceOfTaste { get; set; }
+
+        public string CustomerStatus { get; set; }
     }
 }

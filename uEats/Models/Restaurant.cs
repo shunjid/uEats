@@ -9,5 +9,9 @@ namespace uEats.Models
         
         [MinLength(5)]
         public string RestaurantName { get; set; }
+
+        public string RestaurantStatus { get; set; }
+
+        public float RestaurantAverageRating { get; set; }
     }
 }
