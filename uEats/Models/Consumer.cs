@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace uEats.Models
@@ -18,5 +19,7 @@ namespace uEats.Models
         public Account Account { get; set; }
         
         public Location Location { get; set; }
+
+        public List<Purchase> Purchases { get; set; }
     }
 }

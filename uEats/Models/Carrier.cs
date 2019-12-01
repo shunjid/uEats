@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace uEats.Models
 {
     public class Carrier
@@ -13,5 +15,7 @@ namespace uEats.Models
         public Account Account { get; set; }
 
         public Location Location { get; set; }
+
+        public List<Purchase> Purchases { get; set; }
     }
 }
