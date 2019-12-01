@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace uEats.Models
 {
     public class Carrier
     {
+        [Key]
+        public string CarrierId { get; set; }
         public string CarrierName { get; set; }
 
         public int CarrierAge { get; set; }
