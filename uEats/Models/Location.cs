@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace uEats.Models
@@ -10,5 +11,11 @@ namespace uEats.Models
         public string LocationName { get; set; }
 
         public string LocationCity { get; set; }
+
+        public List<Consumer> Consumers { get; set; }
+
+        public List<Restaurant> Restaurants { get; set; }
+
+        public List<Carrier> Carriers { get; set; }
     }
 }

@@ -9,5 +9,9 @@ namespace uEats.Models
         public string CarrierStatus { get; set; }
 
         public float CarrierAverageRating { get; set; }
+        
+        public Account Account { get; set; }
+
+        public Location Location { get; set; }
     }
 }

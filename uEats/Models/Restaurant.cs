@@ -13,5 +13,9 @@ namespace uEats.Models
         public string RestaurantStatus { get; set; }
 
         public float RestaurantAverageRating { get; set; }
+
+        public Account Account { get; set; }
+        
+        public Location Location { get; set; }
     }
 }

@@ -14,5 +14,9 @@ namespace uEats.Models
         public string ChoiceOfTaste { get; set; }
 
         public string CustomerStatus { get; set; }
+        
+        public Account Account { get; set; }
+        
+        public Location Location { get; set; }
     }
 }
