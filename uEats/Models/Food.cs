@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace uEats.Models
@@ -10,5 +11,7 @@ namespace uEats.Models
         public string FoodName { get; set; }
 
         public string FoodCategory { get; set; }
+        
+        public List<FoodRestaurant> FoodRestaurants { get; set; }
     }
 }
