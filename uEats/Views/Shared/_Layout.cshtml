@@ -4,30 +4,49 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - uEats</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Fonts & Icons Required To Enhance The Look -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Product+Sans:400&amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500&amp;lang=en" rel="stylesheet">
+        
+    <environment include="Development">
+        <link rel="stylesheet" href="~/design/css/materialize.css" media="screen,projection"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/design/css/materialize.min.css" media="screen,projection"/>
+    </environment>
+    <link rel="stylesheet" href="~/css/initialie_layout.css"/>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">uEats</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="nav-extended nav-fixed white">
+            <div class="nav-wrapper">
+                <a class="brand-logo grey-text text-darken-3" id="page-logo">
+                    <i class="material-icons green-text text-darken-1" id="page-logo-icon">fastfood</i> &nbsp; <b>u</b><b>Eats</b>
+                </a>
+                <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+                    <i class="material-icons grey-text text-darken-4">menu</i>
+                </a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <!-- Dropdown Trigger -->
+                    <li><a target="_blank" class="title grey-text">SignIn</a></li>
+                     <li><a target="_blank" class="title grey-text">Registration</a></li>
+                </ul>
             </div>
         </nav>
+        
+        <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
+            <li>
+                <a target="_blank" class="title" href="https://github.com/e-Luminous/ui">
+                    <i class="fab fa-github grey-text"></i> GitHub
+                </a>
+            </li>
+            <li><a target="_blank" class="title grey-text">SignIn</a></li>
+            <li><a target="_blank" class="title grey-text">Registration</a></li>
+        </ul>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -40,9 +59,16 @@
             &copy; 2019 - uEats - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/design/js/materialize.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/design/js/materialize.min.js"></script>
+    </environment>
+    <script src="~/app/initialize_design.js"></script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
