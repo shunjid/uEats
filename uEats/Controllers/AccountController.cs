@@ -3,6 +3,7 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using uEats.Data;
 using uEats.Models;
 
 namespace uEats.Controllers
@@ -137,6 +138,42 @@ namespace uEats.Controllers
                 }
             }
             return View(account);
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> LogIn(AuthUser authUser, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var userName = new MailAddress(authUser.UserEmail).User;
+                var userSignInResult = await _signInManager.PasswordSignInAsync(userName, authUser.UserPassword, true, false);
+
+                if (userSignInResult.Succeeded)
+                {
+                    var userRole = _getCurrentlyLoggedInUserRole(userName);
+                    if (userRole == "Consumer")
+                    {
+                        return RedirectToAction("Index", "Consumer", new
+                        {
+                            connId = _getCurrentlyLoggedInUserId(userName)
+                        });
+                    }
+                    if (userRole == "Restaurant")
+                    {
+                        return RedirectToAction("Index", "Restaurant", new
+                        {
+                            connId = _getCurrentlyLoggedInUserId(userName)
+                        });
+                    }
+
+                    return RedirectToAction("Index", "Carrier", new
+                    {
+                        connId = _getCurrentlyLoggedInUserId(userName)
+                    });
+                }
+                ModelState.AddModelError("", "Invalid SignIn Attempt");
+            }
+            return View(authUser);
         }
 
 
