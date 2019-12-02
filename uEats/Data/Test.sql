@@ -17,3 +17,20 @@ AS
 BEGIN
     SELECT * FROM Foods WHERE FoodCategory = @category
 END
+
+INSERT INTO Locations(LocationName, LocationCity) VALUES
+('Rayerbag', 'Dhaka'),
+('Jatrabari', 'Dhaka'),
+('Kadamtali', 'Dhaka'),
+('Shyampur', 'Dhaka'),
+('Kajla', 'Dhaka'),
+('Shanir Akhra', 'Dhaka'),
+('Chaan Khar Pool', 'Dhaka'),
+('Bakhshi Bazar', 'Dhaka'),
+('Dhanmondi-32', 'Dhaka'),
+('Shukrabad', 'Dhaka'),
+('Mirpur 01', 'Dhaka'),
+('Shyamoli', 'Dhaka'),
+('Agrabad', 'Chittagong'),
+('Chashara', 'Narayanganj'),
+('Babupara', 'Kushtia');

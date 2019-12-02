@@ -79,6 +79,7 @@ namespace uEats.Controllers
                     {
                         var consumer = new Consumer
                         {
+                            ConsumerId = account.AccountId,
                             Account = account,
                             CustomerStatus = "Silver"
                         };
@@ -96,6 +97,7 @@ namespace uEats.Controllers
                     {
                         var restaurant = new Restaurant
                         {
+                            RestaurantId = account.AccountId,
                             Account = account,
                             RestaurantStatus = "Silver",
                             RestaurantAverageRating = 0.0f
@@ -113,6 +115,7 @@ namespace uEats.Controllers
 
                     var carrier = new Carrier
                     {
+                        CarrierId = account.AccountId,
                         Account = account,
                         CarrierStatus = "Silver",
                         CarrierAverageRating = 0.0f
