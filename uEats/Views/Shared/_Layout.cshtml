@@ -32,20 +32,15 @@
                 </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <!-- Dropdown Trigger -->
-                    <li><a target="_blank" class="title grey-text">SignIn</a></li>
-                     <li><a target="_blank" class="title grey-text">Registration</a></li>
+                    <li><a class="title grey-text" asp-action="LogIn" asp-controller="Account">SignIn</a></li>
+                     <li><a class="title grey-text" asp-action="Register" asp-controller="Account">Registration</a></li>
                 </ul>
             </div>
         </nav>
         
         <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
-            <li>
-                <a target="_blank" class="title" href="https://github.com/e-Luminous/ui">
-                    <i class="fab fa-github grey-text"></i> GitHub
-                </a>
-            </li>
-            <li><a target="_blank" class="title grey-text">SignIn</a></li>
-            <li><a target="_blank" class="title grey-text">Registration</a></li>
+            <li><a class="title grey-text" asp-action="LogIn" asp-controller="Account">SignIn</a></li>
+            <li><a class="title grey-text" asp-action="Register" asp-controller="Account">Registration</a></li>
         </ul>
     </header>
     <div class="container">
