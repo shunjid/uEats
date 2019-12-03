@@ -34,3 +34,16 @@ INSERT INTO Locations(LocationName, LocationCity) VALUES
 ('Agrabad', 'Chittagong'),
 ('Chashara', 'Narayanganj'),
 ('Babupara', 'Kushtia');
+
+CREATE PROCEDURE UpdateRestaurantInformation
+@restaurantId nvarchar(max),
+@restaurantName nvarchar(max),
+@locationId int
+AS
+BEGIN
+    UPDATE Restaurants
+    SET RestaurantName = @restaurantName, LocationId = @locationId
+    WHERE RestaurantId = @restaurantId;
+    
+    SELECT * FROM Restaurants WHERE RestaurantId = @restaurantId;
+END

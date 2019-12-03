@@ -23,6 +23,6 @@ namespace uEats.Models
 
         public List<FoodRestaurant> FoodRestaurants { get; set; }
         
-        [NotMapped] public List<SelectListItem> Locations { get; }
+        [NotMapped] public List<SelectListItem> Locations { get; set; }
     }
 }

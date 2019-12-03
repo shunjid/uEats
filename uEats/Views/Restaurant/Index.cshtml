@@ -4,13 +4,14 @@
 }
 
 <div class="col s12 l12">
-  <h2 class="header">Horizontal Card</h2>
   <div class="card horizontal">
     <div class="card-image">
       <img src="~/design/images/undraw_Hamburger_8ge6.svg" alt="">
     </div>
     <div class="card-stacked">
       <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Restaurant Information
+          <i class="material-icons right modal-trigger" href="#modal1">edit</i></span>
         <p>@Model.RestaurantAverageRating</p>
       </div>
       <div class="card-action">
@@ -20,3 +21,29 @@
   </div>
 </div>
 
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <form method="post">
+      <div class="row">
+        <form class="col s12">
+          <input type="hidden" asp-for="RestaurantId"/>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Restaurant Name" asp-for="RestaurantName" type="text" class="validate">
+              <label>Your Restaurant Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <select asp-for="Location.LocationId" asp-items="Model.Locations"></select>
+              <label>Location of Your Restaurant</label>
+            </div>
+          </div>
+          <div class="row">
+            <button type="submit" class="btn blue darken-2">Upgrade Information</button>
+          </div>
+        </form>
+      </div>
+    </form>
+  </div>
+</div>
