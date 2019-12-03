@@ -9,6 +9,38 @@
 
 }
 
+#imgRes {
+    margin-top: 80px;
+}
+
+#imgResBackup{
+    display: none;
+}
+
 .border-top {
     margin-top: 800px;
+}
+
+h6 {
+    font-family: 'Google Sans', monospace;
+}
+span {
+    font-family: 'Google Sans', monospace;
+}
+
+.section {
+    margin-top: -18px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    #imgRes{
+        display: none;
+    }
+    #imgResBackup {
+        display: block;
+    }
+    h6 {
+        font-size: .80em;
+    }
 }

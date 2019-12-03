@@ -28,11 +28,12 @@
         <nav class="nav-extended nav-fixed grey darken-4">
             <div class="nav-wrapper">
                 <a class="brand-logo" id="page-logo">
-                    <i class="material-icons blue-text text-darken-2" id="page-logo-icon">fastfood</i> &nbsp; <b>u</b><b>Eats</b>
+                    <i class="material-icons blue-text text-darken-1" id="page-logo-icon">fastfood</i> &nbsp; <b>u</b><b>Eats</b>
                 </a>
                 <a href="#" class="sidenav-trigger" data-target="mobile-nav">
                     <i class="material-icons">menu</i>
                 </a>
+                
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -44,6 +45,19 @@
                             </form>
                         </li>   
                     }
+                </ul>
+            </div>
+            <div class="nav-content grey darken-4">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab">
+                        <a id="_tabRestaurantOrg" target="_self" asp-action="Index" asp-controller="Restaurant" asp-route-resId="@ViewBag.restaurantIdViewBag">Organization</a>
+                    </li>
+                    <li class="tab">
+                        <a id="_tabRestaurantBreads" target="_self" asp-action="Breads" asp-controller="Restaurant" asp-route-resId="@ViewBag.restaurantIdViewBag">Breads</a>
+                    </li>
+                    <li class="tab">
+                        <a id="_tabRestaurantConfiguration" target="_self" asp-action="Configurations" asp-controller="Restaurant" asp-route-resId="@ViewBag.restaurantIdViewBag">Configuration</a>
+                    </li>
                 </ul>
             </div>
         </nav>

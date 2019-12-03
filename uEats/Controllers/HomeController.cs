@@ -28,8 +28,7 @@ namespace uEats.Controllers
 
         public IActionResult Privacy()
         {
-            var foodsByCategory = _context.Foods.FromSqlRaw("EXECUTE GetFoodsByCategory 'Sweets'").ToList();
-            return Ok(foodsByCategory);
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

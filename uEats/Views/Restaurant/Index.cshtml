@@ -4,18 +4,55 @@
 }
 
 <div class="col s12 l12">
-  <div class="card horizontal">
+  <img id="imgResBackup" class="responsive-img" src="~/design/images/undraw_Hamburger_8ge6.svg" alt="">
+  <div class="card horizontal hoverable" id="cardHorizontal">
     <div class="card-image">
-      <img src="~/design/images/undraw_Hamburger_8ge6.svg" alt="">
+      <img id="imgRes" src="~/design/images/undraw_Hamburger_8ge6.svg" alt="">
     </div>
     <div class="card-stacked">
       <div class="card-content">
         <span class="card-title activator grey-text text-darken-4">Restaurant Information
           <i class="material-icons right modal-trigger" href="#modal1">edit</i></span>
-        <p>@Model.RestaurantAverageRating</p>
+        <hr/>
+        <h6>
+          <b>Your organization Id :</b>
+          <span class="right">@Model.RestaurantId</span>
+        </h6>
+        <h6>
+          <b>Restaurant Name :</b>
+          <span class="right">
+            @(string.IsNullOrEmpty(Model.RestaurantName) ? "Not available" : Model.RestaurantName)
+          </span>
+        </h6>
+        <h6>
+          <b>Area :</b>
+          <span class="right">
+            @(string.IsNullOrEmpty(Model.Location.LocationName) ? "Not available" : Model.Location.LocationName)
+          </span>
+        </h6>
+        <h6>
+          <b>City :</b>
+          <span class="right">
+            @(string.IsNullOrEmpty(Model.Location.LocationCity) ? "Not available" : Model.RestaurantName)
+          </span>
+        </h6>
+        <h6>
+          <b>Restaurant Status :</b>
+          <span class="right">
+            @(string.IsNullOrEmpty(Model.RestaurantStatus) ? "Not available" : Model.RestaurantStatus)
+          </span>
+        </h6>
+        <h6>
+          <b>Average Rating :</b>
+          <span class="right">
+            @Model.RestaurantAverageRating
+          </span>
+        </h6>
+
+
       </div>
       <div class="card-action">
-        <a href="#">This is a link</a>
+        <a class="modal-trigger blue-text text-darken-2" href="#modal1">Upgrade Information</a>
       </div>
     </div>
   </div>
@@ -47,3 +84,12 @@
     </form>
   </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+      $("#_tabRestaurantOrg").attr('class', 'active');
+    });
+</script>
+

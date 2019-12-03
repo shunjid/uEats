@@ -47,3 +47,15 @@ BEGIN
     
     SELECT * FROM Restaurants WHERE RestaurantId = @restaurantId;
 END
+
+/*SqlParameter param1 = new SqlParameter("@p0",restaurant.RestaurantId);
+SqlParameter param2 = new SqlParameter("@p1", restaurant.RestaurantName);
+SqlParameter param3 = new SqlParameter("@p2", restaurant.Location.LocationId);
+
+var res = _context.Restaurants
+    .FromSqlRaw("UpdateRestaurantInformation @p0,@p1,@p2", param1, param2, param3)
+    .ToList();*/
+
+/*var res = await _context.Database.ExecuteSqlInterpolatedAsync(
+    $"EXEC UpdateRestaurantInformation @restaurantId={restaurant.RestaurantId}, @restaurantName={restaurant.RestaurantName}, @locationId = {restaurant.Location.LocationId}");
+*/
