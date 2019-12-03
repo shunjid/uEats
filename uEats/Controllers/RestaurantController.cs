@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -77,8 +78,56 @@ namespace uEats.Controllers
 
         public IActionResult Breads(string resId)
         {
+            var foods = _context.Foods.ToList();
+            var frs = _context.FoodRestaurants.Where(ff => ff.RestaurantId == resId).ToList();
+            var foodRestaurant = new FoodRestaurant
+            {
+                RestaurantId = resId,
+                FoodRestaurantPrice = 0.0f
+            };
+            foodRestaurant.AvailableFoodsCanBeAdded = new List<SelectListItem>();
+
+            if (frs.Count != 0)
+            {
+                foreach (var eachFrs in frs)
+                {
+                    var eachFood = foods.SingleOrDefault(ff => ff.FoodId == eachFrs.FoodId);
+                    foods.Remove(eachFood);
+                }
+            }
+            foreach (var eachFood in foods)
+            {
+                foodRestaurant.AvailableFoodsCanBeAdded.Add(new SelectListItem
+                {
+                    Value = eachFood.FoodId.ToString(),
+                    Text = eachFood.FoodName
+                });
+            }
+
             ViewBag.restaurantIdViewBag = resId;
-            return View();
+            return View(foodRestaurant);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Breads(FoodRestaurant foodRestaurant)
+        {
+            foodRestaurant.AddedIn = DateTime.Today;
+
+            try
+            {
+                var res = await _context.Database.ExecuteSqlInterpolatedAsync(
+                    $"EXEC sp__PushNewItemOfTheRestaurant @foodId={foodRestaurant.FoodId}, @restaurantId={foodRestaurant.RestaurantId}, @added = {foodRestaurant.AddedIn}, @price = {foodRestaurant.FoodRestaurantPrice}");
+                
+                return RedirectToAction("Breads", "Restaurant", new
+                {
+                    resId = foodRestaurant.RestaurantId
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public IActionResult Configurations(string resId)
