@@ -162,13 +162,13 @@ namespace uEats.Controllers
                     {
                         return RedirectToAction("Index", "Restaurant", new
                         {
-                            connId = _getCurrentlyLoggedInUserId(userName)
+                            resId = _getCurrentlyLoggedInUserId(userName)
                         });
                     }
 
                     return RedirectToAction("Index", "Carrier", new
                     {
-                        connId = _getCurrentlyLoggedInUserId(userName)
+                        carrIId = _getCurrentlyLoggedInUserId(userName)
                     });
                 }
                 ModelState.AddModelError("", "Invalid SignIn Attempt");

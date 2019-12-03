@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using uEats.Models;
 
 namespace uEats.Controllers
@@ -20,7 +21,10 @@ namespace uEats.Controllers
 
         public async Task<IActionResult> Index(string resId)
         {
-            return View();
+            var restaurant = await _context
+                            .Restaurants
+                            .SingleOrDefaultAsync(res => res.RestaurantId == resId);
+            return View(restaurant);
         }
     }
 }
