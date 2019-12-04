@@ -42,7 +42,6 @@ namespace uEats.Controllers
                     Value = eachLocation.LocationId.ToString()
                 });
             }
-
             ViewBag.restaurantIdViewBag = restaurant.RestaurantId;
             return View(restaurant);
         }
@@ -130,6 +129,26 @@ namespace uEats.Controllers
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteBread(FoodRestaurant foodRestaurant)
+        {
+            try
+            {
+                var deleteAnItemFromRestaurant = await _context.Database
+                    .ExecuteSqlInterpolatedAsync($"EXEC sp__RemoveItemOfTheRestaurant @foodId = {foodRestaurant.FoodId}, @restaurantId = {foodRestaurant.RestaurantId}");
+                
+                
+                return RedirectToAction("Breads", "Restaurant", new
+                {
+                    resId = foodRestaurant.RestaurantId
+                });
+            }
+            catch (Exception e)
+            {
+                throw;
+            }   
         }
 
         public IActionResult Configurations(string resId)

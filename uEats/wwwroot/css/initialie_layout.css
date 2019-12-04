@@ -21,9 +21,18 @@
     margin-top: 800px;
 }
 
+h4 {
+    font-family: 'Google Sans', monospace;
+}
+
 h6 {
     font-family: 'Google Sans', monospace;
 }
+
+b {
+    font-family: 'Google Sans', monospace;
+}
+
 span {
     font-family: 'Google Sans', monospace;
 }

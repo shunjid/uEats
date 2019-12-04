@@ -3,30 +3,38 @@
     Layout = "_LayoutRestaurant";
 }
 
-<div class="card">
-    <div class="card-content">
-        <form method="post">
-            <div class="row">
-                <input type="hidden" asp-for="RestaurantId"/>
+@if (!Model.AvailableFoodsCanBeAdded.Any())
+{
+    <h4 class="center-align"><b>You have added all the foods</b></h4>
+}
+
+@if (Model.AvailableFoodsCanBeAdded.Count() != 0)
+{
+    <div class="card">
+        <div class="card-content">
+            <form  method="post">
                 <div class="row">
-                    <div class="input-field col s12">
-                        <select asp-for="FoodId" asp-items="Model.AvailableFoodsCanBeAdded"></select>
-                        <label>Choose the food item</label>
+                    <input type="hidden" asp-for="RestaurantId"/>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <select asp-for="FoodId" asp-items="Model.AvailableFoodsCanBeAdded"></select>
+                            <label>Choose the food item</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Restaurant Name" asp-for="FoodRestaurantPrice" type="number" class="validate">
+                            <label>Price</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn blue darken-2">Add a new food</button>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Restaurant Name" asp-for="FoodRestaurantPrice" type="number" class="validate">
-                        <label>Price</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <button type="submit" class="btn blue darken-2">Add a new food</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+}
 
 <div class="row">
     @{
@@ -34,7 +42,7 @@
     }
     @{
         if (!foodsOfTheRestaurant.Any()){
-            <h4>You have no food items yet</h4>
+            <h4 class="center-align"><b>You have no food items yet</b></h4>
         }
         else
         {
@@ -42,30 +50,42 @@
             {
                 @if (eachFr.FoodId % 2 == 0)
                 {
-                    <div class="col s12 l4">
-                        <div class="card card-1 ucard">
-                            <h5 class="indigo-text text-darken-4">@eachFr.Food.FoodName</h5>
-                            <h6 class="count blue-grey-text text-darken-4">
-                                <b class="left">@eachFr.Food.FoodCategory</b>
-                                <span class="right">@eachFr.FoodRestaurantPrice</span>
-                            </h6>
-                            <br/>
+                    <form asp-controller="Restaurant" asp-action="DeleteBread" method="post">
+                        <div class="col s12 l4">
+                            <input type="hidden" asp-for="RestaurantId" value="@Model.RestaurantId" />
+                            <input type="hidden" asp-for="FoodId" value="@eachFr.FoodId" />
+                            <div class="card card-2 ucard">
+                                <h5 class="indigo-text text-darken-4">@eachFr.Food.FoodName</h5>
+                                <h6 class="count blue-grey-text text-darken-4">
+                                    <b class="left">@eachFr.Food.FoodCategory</b>
+                                    <span class="right">@eachFr.FoodRestaurantPrice</span>
+                                </h6>
+                                <br/>
+                                <button type="submit" class="btn-floating btn-large waves-effect waves-light transparent"><i class="material-icons red-text">delete</i></button>
+                                <br/>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 }
                 
                 @if (eachFr.FoodId % 2 != 0)
                 {
-                    <div class="col s12 l4">
-                        <div class="card card-2 ucard">
-                            <h5 class="indigo-text text-darken-4">@eachFr.Food.FoodName</h5>
-                            <h6 class="count blue-grey-text text-darken-4">
-                                <b class="left">@eachFr.Food.FoodCategory</b>
-                                <span class="right">@eachFr.FoodRestaurantPrice</span>
-                            </h6>
-                            <br/>
+                    <form asp-controller="Restaurant" asp-action="DeleteBread" method="post">
+                        <div class="col s12 l4">
+                            <input type="hidden" asp-for="RestaurantId" value="@Model.RestaurantId" />
+                            <input type="hidden" asp-for="FoodId" value="@eachFr.FoodId" />
+                            <div class="card card-3 ucard">
+                                <h5 class="indigo-text text-darken-4">@eachFr.Food.FoodName</h5>
+                                <h6 class="count blue-grey-text text-darken-4">
+                                    <b class="left">@eachFr.Food.FoodCategory</b>
+                                    <span class="right">@eachFr.FoodRestaurantPrice</span>
+                                </h6>
+                                <br/>
+                                <button type="submit" class="btn-floating btn-large waves-effect waves-light transparent"><i class="material-icons red-text">delete</i></button>
+                                <br/>
+                            </div>
                         </div>
-                    </div>    
+                    </form>    
                 }
             }
         }
