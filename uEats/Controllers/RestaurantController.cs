@@ -79,7 +79,8 @@ namespace uEats.Controllers
         public IActionResult Breads(string resId)
         {
             var foods = _context.Foods.ToList();
-            var frs = _context.FoodRestaurants.Where(ff => ff.RestaurantId == resId).ToList();
+            var frs = _context.FoodRestaurants.Include(ff => ff.Food).Where(ff => ff.RestaurantId == resId).ToList();
+            
             var foodRestaurant = new FoodRestaurant
             {
                 RestaurantId = resId,
@@ -104,6 +105,7 @@ namespace uEats.Controllers
                 });
             }
 
+            ViewBag.FoodsOfTheRestaurant = frs;
             ViewBag.restaurantIdViewBag = resId;
             return View(foodRestaurant);
         }

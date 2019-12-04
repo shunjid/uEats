@@ -5,27 +5,72 @@
 
 <div class="card">
     <div class="card-content">
-         <form method="post">
-           <div class="row">
-               <input type="hidden" asp-for="RestaurantId"/>
-               <div class="row">
-                   <div class="input-field col s12">
-                       <select asp-for="FoodId" asp-items="Model.AvailableFoodsCanBeAdded"></select>
-                       <label>Choose the food item</label>
-                   </div>
-               </div>
-               <div class="row">
-                 <div class="input-field col s12">
-                   <input placeholder="Restaurant Name" asp-for="FoodRestaurantPrice" type="number" class="validate">
-                   <label>Price</label>
-                 </div>
-               </div>
-               <div class="row">
-                 <button type="submit" class="btn blue darken-2">Add a new food</button>
-               </div>
-           </div>
-       </form>
+        <form method="post">
+            <div class="row">
+                <input type="hidden" asp-for="RestaurantId"/>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select asp-for="FoodId" asp-items="Model.AvailableFoodsCanBeAdded"></select>
+                        <label>Choose the food item</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Restaurant Name" asp-for="FoodRestaurantPrice" type="number" class="validate">
+                        <label>Price</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn blue darken-2">Add a new food</button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
+
+<div class="row">
+    @{
+        var foodsOfTheRestaurant = (List<FoodRestaurant>) ViewBag.FoodsOfTheRestaurant;
+    }
+    @{
+        if (!foodsOfTheRestaurant.Any()){
+            <h4>You have no food items yet</h4>
+        }
+        else
+        {
+            foreach (var eachFr in foodsOfTheRestaurant)
+            {
+                @if (eachFr.FoodId % 2 == 0)
+                {
+                    <div class="col s12 l4">
+                        <div class="card card-1 ucard">
+                            <h5 class="indigo-text text-darken-4">@eachFr.Food.FoodName</h5>
+                            <h6 class="count blue-grey-text text-darken-4">
+                                <b class="left">@eachFr.Food.FoodCategory</b>
+                                <span class="right">@eachFr.FoodRestaurantPrice</span>
+                            </h6>
+                            <br/>
+                        </div>
+                    </div>
+                }
+                
+                @if (eachFr.FoodId % 2 != 0)
+                {
+                    <div class="col s12 l4">
+                        <div class="card card-2 ucard">
+                            <h5 class="indigo-text text-darken-4">@eachFr.Food.FoodName</h5>
+                            <h6 class="count blue-grey-text text-darken-4">
+                                <b class="left">@eachFr.Food.FoodCategory</b>
+                                <span class="right">@eachFr.FoodRestaurantPrice</span>
+                            </h6>
+                            <br/>
+                        </div>
+                    </div>    
+                }
+            }
+        }
+    }
+    
 </div>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>

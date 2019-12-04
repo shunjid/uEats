@@ -27,13 +27,13 @@
         <h6>
           <b>Area :</b>
           <span class="right">
-            @(string.IsNullOrEmpty(Model.Location.LocationName) ? "Not available" : Model.Location.LocationName)
+            @(Model.Location == null ? "Not available" : Model.Location.LocationName)
           </span>
         </h6>
         <h6>
           <b>City :</b>
           <span class="right">
-            @(string.IsNullOrEmpty(Model.Location.LocationCity) ? "Not available" : Model.RestaurantName)
+            @(Model.Location == null ? "Not available" : Model.Location.LocationCity)
           </span>
         </h6>
         <h6>
