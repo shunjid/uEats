@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -22,25 +25,40 @@
 </head>
 <body>
     <header>
-        <nav class="nav-extended nav-fixed white">
+        <nav class="nav-extended nav-fixed grey darken-4">
             <div class="nav-wrapper">
-                <a class="brand-logo grey-text text-darken-3" id="page-logo">
+                <a class="brand-logo" id="page-logo">
                     <i class="material-icons green-text text-darken-1" id="page-logo-icon">fastfood</i> &nbsp; <b>u</b><b>Eats</b>
                 </a>
                 <a href="#" class="sidenav-trigger" data-target="mobile-nav">
-                    <i class="material-icons grey-text text-darken-4">menu</i>
+                    <i class="material-icons">menu</i>
                 </a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!-- Dropdown Trigger -->
-                    <li><a class="title grey-text" asp-action="LogIn" asp-controller="Account">SignIn</a></li>
-                     <li><a class="title grey-text" asp-action="Register" asp-controller="Account">Registration</a></li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                <a onclick="$(this).closest('form').submit();" class="btn-floating tooltipped btn-small waves-effect waves-light teal" data-position="left" data-tooltip="Logout @User.Identity.Name">
+                                    <i class="material-icons">power_settings_new</i>
+                                </a>
+                            </form>
+                        </li>   
+                    }
                 </ul>
             </div>
         </nav>
         
         <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
-            <li><a class="title grey-text" asp-action="LogIn" asp-controller="Account">SignIn</a></li>
-            <li><a class="title grey-text" asp-action="Register" asp-controller="Account">Registration</a></li>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="nav-item">
+                    <form method="post" asp-action="Logout" asp-controller="Account">
+                        <a onclick="$(this).closest('form').submit();" class="btn-floating tooltipped btn-small waves-effect waves-light teal" data-position="left" data-tooltip="Logout @User.Identity.Name">
+                            <i class="material-icons">power_settings_new</i>
+                        </a>
+                    </form>
+                </li>   
+            }
         </ul>
     </header>
     <div class="container">

@@ -1,0 +1,104 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<CustomUser> SignInManager;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - uEats</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Fonts & Icons Required To Enhance The Look -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Product+Sans:400&amp;lang=en" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500&amp;lang=en" rel="stylesheet">
+        
+    <environment include="Development">
+        <link rel="stylesheet" href="~/design/css/materialize.css" media="screen,projection"/>
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/design/css/materialize.min.css" media="screen,projection"/>
+    </environment>
+    <link rel="stylesheet" href="~/css/initialie_layout.css"/>
+</head>
+<body>
+    <header>
+        <nav class="nav-extended nav-fixed grey darken-4">
+            <div class="nav-wrapper">
+                <a class="brand-logo" id="page-logo">
+                    <i class="material-icons blue-text text-darken-1" id="page-logo-icon">fastfood</i> &nbsp; <b>u</b><b>Eats</b>
+                </a>
+                <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+                    <i class="material-icons">menu</i>
+                </a>
+                
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                <a onclick="$(this).closest('form').submit();" class="btn-floating tooltipped btn-small waves-effect waves-light blue darken-2" data-position="left" data-tooltip="Logout @User.Identity.Name">
+                                    <i class="material-icons">power_settings_new</i>
+                                </a>
+                            </form>
+                        </li>   
+                    }
+                </ul>
+            </div>
+            <div class="nav-content grey darken-4">
+                <ul class="tabs tabs-transparent">
+                    <li class="tab">
+                        <a id="_tabRestaurantOrg" target="_self" asp-action="Index" asp-controller="Restaurant" asp-route-resId="@ViewBag.restaurantIdViewBag">Organization</a>
+                    </li>
+                    <li class="tab">
+                        <a id="_tabRestaurantBreads" target="_self" asp-action="Breads" asp-controller="Restaurant" asp-route-resId="@ViewBag.restaurantIdViewBag">Breads</a>
+                    </li>
+                    <li class="tab">
+                        <a id="_tabRestaurantConfiguration" target="_self" asp-action="Configurations" asp-controller="Restaurant" asp-route-resId="@ViewBag.restaurantIdViewBag">Configuration</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <ul class="sidenav yellow-text text-darken-3" id="mobile-nav">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="nav-item">
+                    <form method="post" asp-action="Logout" asp-controller="Account">
+                        <a onclick="$(this).closest('form').submit();" class="btn-floating tooltipped btn-small waves-effect waves-light teal" data-position="left" data-tooltip="Logout @User.Identity.Name">
+                            <i class="material-icons">power_settings_new</i>
+                        </a>
+                    </form>
+                </li>   
+            }
+        </ul>
+    </header>
+    <div class="section">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+      <div class="footer-copyright">
+        <div class="container">
+        © 2019 Copyright Text
+        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/design/js/materialize.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/design/js/materialize.min.js"></script>
+    </environment>
+    <script src="~/app/initialize_design.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿@model Restaurant
+@{
+    Layout = "_LayoutRestaurant";
+}
+
+<div class="col s12 l12">
+  <img id="imgResBackup" class="responsive-img" src="~/design/images/undraw_Hamburger_8ge6.svg" alt="">
+  <div class="card horizontal hoverable" id="cardHorizontal">
+    <div class="card-image">
+      <img id="imgRes" src="~/design/images/undraw_Hamburger_8ge6.svg" alt="">
+    </div>
+    <div class="card-stacked">
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4">Restaurant Information
+          <i class="material-icons right modal-trigger" href="#modal1">edit</i></span>
+        <hr/>
+        <h6>
+          <b>Your organization Id :</b>
+          <span class="right">@Model.RestaurantId</span>
+        </h6>
+        <h6>
+          <b>Restaurant Name :</b>
+          <span class="right">
+            @(string.IsNullOrEmpty(Model.RestaurantName) ? "Not available" : Model.RestaurantName)
+          </span>
+        </h6>
+        <h6>
+          <b>Area :</b>
+          <span class="right">
+            @(Model.Location == null ? "Not available" : Model.Location.LocationName)
+          </span>
+        </h6>
+        <h6>
+          <b>City :</b>
+          <span class="right">
+            @(Model.Location == null ? "Not available" : Model.Location.LocationCity)
+          </span>
+        </h6>
+        <h6>
+          <b>Restaurant Status :</b>
+          <span class="right">
+            @(string.IsNullOrEmpty(Model.RestaurantStatus) ? "Not available" : Model.RestaurantStatus)
+          </span>
+        </h6>
+        <h6>
+          <b>Average Rating :</b>
+          <span class="right">
+            @Model.RestaurantAverageRating
+          </span>
+        </h6>
+
+
+      </div>
+      <div class="card-action">
+        <a class="modal-trigger blue-text text-darken-2" href="#modal1">Upgrade Information</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <form method="post">
+      <div class="row">
+      <input type="hidden" asp-for="RestaurantId"/>
+          <div class="row">
+            <div class="input-field col s12">
+              <input placeholder="Restaurant Name" asp-for="RestaurantName" type="text" class="validate">
+              <label>Your Restaurant Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <select asp-for="Location.LocationId" asp-items="Model.Locations"></select>
+              <label>Location of Your Restaurant</label>
+            </div>
+          </div>
+          <div class="row">
+            <button type="submit" class="btn blue darken-2">Upgrade Information</button>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+      $("#_tabRestaurantOrg").attr('class', 'active');
+    });
+</script>
+

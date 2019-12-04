@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace uEats.Models
 {
@@ -20,5 +22,7 @@ namespace uEats.Models
         public Location Location { get; set; }
 
         public List<FoodRestaurant> FoodRestaurants { get; set; }
+        
+        [NotMapped] public List<SelectListItem> Locations { get; set; }
     }
 }
