@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using uEats.Models;
 
@@ -42,6 +40,7 @@ namespace uEats.Controllers
                     Value = eachLocation.LocationId.ToString()
                 });
             }
+            
             ViewBag.restaurantIdViewBag = restaurant.RestaurantId;
             return View(restaurant);
         }
@@ -153,8 +152,28 @@ namespace uEats.Controllers
 
         public IActionResult Configurations(string resId)
         {
+            var countItems = _context.FoodRestaurants.Where(rr => rr.RestaurantId == resId).ToList();
+            
+            var operation = new Operation
+            {
+                RestaurantId = resId
+            };
+
+            ViewBag.itemsAdded = countItems.Count();
             ViewBag.restaurantIdViewBag = resId;
-            return View();
+            return View(operation);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Configurations(Operation operation)
+        {
+            var checkMinPrize = await _context.Database
+                .ExecuteSqlInterpolatedAsync($"EXEC sp__UpgradePriceOfAllItemsOfTheRestaurant @typeOfOperation = {operation.TypeOfOperation}, @minPrice = {operation.MinimumProductPrice} , @amountToTrigger={operation.AmountToTrigger} , @restaurantId = {operation.RestaurantId}");
+            
+            return RedirectToAction("Configurations", "Restaurant", new
+            {
+                resId = operation.RestaurantId
+            });
         }
         
         private bool RestaurantExists(string id)

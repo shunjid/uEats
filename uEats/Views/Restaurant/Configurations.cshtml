@@ -1,8 +1,55 @@
-﻿@{
+﻿@model Operation
+@{
     Layout = "_LayoutRestaurant";
 }
 
-Yo
+@if(ViewBag.itemsAdded < 3) {
+    <h4 class="center-align">Add at least 3 items to activate this page</h4>
+}
+@if (ViewBag.itemsAdded >= 3)
+{
+    <div class="card">
+        <div class="card-content">
+            <form method="post">
+                <div class="row">
+                    <input type="hidden" asp-for="RestaurantId"/>
+                    <div class="row">
+                        <div class="row">
+                            <div class="col s12">
+                                <p>
+                                    <label>Choose an operation type</label>
+                                    <label>
+                                        <input class="with-gap" asp-for="TypeOfOperation" id="Increase" value="Increase" type="radio" checked/>
+                                        <span>Increase</span>
+                                    </label>
+                                    <label>
+                                        <input class="with-gap" asp-for="TypeOfOperation" id="Decrease" value="Decrease" type="radio"/>
+                                        <span>Decrease</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Amount To Target" asp-for="MinimumProductPrice" type="number" class="validate">
+                            <label>Your minimum product price</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Amount To Trigger" asp-for="AmountToTrigger" type="number" class="validate">
+                            <label>Trigger at per product</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn blue darken-2">Trigger</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
 <script src="~/lib/jquery/dist/jquery.js"></script>
 
 <script type="text/javascript">

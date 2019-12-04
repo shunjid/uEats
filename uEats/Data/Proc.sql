@@ -73,3 +73,33 @@ END
 go
 
 
+
+
+CREATE Procedure sp__UpgradePriceOfAllItemsOfTheRestaurant
+@typeOfOperation nvarchar(max),
+@minPrice real,
+@amountToTrigger real,
+@restaurantId nvarchar(max)
+AS
+BEGIN
+    IF @typeOfOperation = 'Increase'
+        BEGIN
+            WHILE (SELECT MIN(FoodRestaurantPrice) FROM FoodRestaurants WHERE RestaurantId = @restaurantId) < @minPrice
+                BEGIN
+                   UPDATE FoodRestaurants
+                   SET FoodRestaurantPrice += @amountToTrigger
+                   WHERE RestaurantId = @restaurantId;
+                END
+        END
+    ELSE
+        BEGIN
+             WHILE (SELECT MIN(FoodRestaurantPrice) FROM FoodRestaurants WHERE RestaurantId = @restaurantId) > @minPrice
+                BEGIN
+                   UPDATE FoodRestaurants
+                   SET FoodRestaurantPrice -= @amountToTrigger
+                   WHERE RestaurantId = @restaurantId;
+                END
+        END
+END
+go
+
